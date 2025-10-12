@@ -126,7 +126,7 @@ const ProductGrid = () => {
   };
 
   return (
-    <section id="products" className="py-20 bg-white">
+    <section id="products" className="pt-12 pb-8 md:py-20 bg-white">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Заголовок секции */}
         <motion.div

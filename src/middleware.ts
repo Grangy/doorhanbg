@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
 
   response.headers.set('x-region', region);
   response.headers.set('x-pathname', request.nextUrl.pathname);
-  console.log(request.nextUrl.pathname);
+
   return response;
 }
 

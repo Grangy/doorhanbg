@@ -112,7 +112,7 @@ const ContactsSection = () => {
   };
 
   return (
-    <section id="contacts" className="py-20 bg-white">
+    <section id="contacts" className="pt-12 pb-8 md:py-20 bg-white">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Заголовок секции */}
         <motion.div

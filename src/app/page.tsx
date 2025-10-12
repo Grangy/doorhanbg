@@ -2,8 +2,7 @@ import { headers } from 'next/headers';
 
 async function getRegion() {
   const headersList = await headers();
-  const region = headersList.get('x-region') || 'default';
-  return region;
+  return headersList.get('x-region') || 'default';
 }
 
 import Header from '@/components/Header';

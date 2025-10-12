@@ -161,7 +161,7 @@ const ProductsList = () => {
   });
 
   return (
-    <section className="pt-24 pb-20 bg-white">
+    <section className="pt-12 pb-8 md:pt-24 md:pb-20 bg-white">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Хлебные крошки */}
         <motion.div

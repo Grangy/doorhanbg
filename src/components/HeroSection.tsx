@@ -10,7 +10,7 @@ import { ArrowRight, Shield, Award, Users, Clock } from 'lucide-react';
 const HeroSection = ({ region }: HeroSectionProps) => {
   const features = [
     { icon: Shield, text: 'Гарантия качества' },
-    { icon: Award, text: 'Сертифицированная продукция' },
+    { icon: Award, text: 'Сертификаты' },
     { icon: Users, text: 'Опытная команда' },
     { icon: Clock, text: 'Быстрая установка' },
   ];
@@ -83,7 +83,7 @@ const HeroSection = ({ region }: HeroSectionProps) => {
       </div>
 
       {/* Основной контент */}
-      <div className="container mx-auto px-4 py-20 relative z-10">
+      <div className="container mx-auto px-4 pt-8 pb-8 md:py-20 relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -141,7 +141,7 @@ const HeroSection = ({ region }: HeroSectionProps) => {
           {/* Особенности */}
           <motion.div
             variants={itemVariants}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 max-w-4xl mx-auto px-4"
           >
             {features.map((feature, index) => (
               <motion.div
@@ -153,13 +153,15 @@ const HeroSection = ({ region }: HeroSectionProps) => {
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+                className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-8 border border-white/20"
               >
                 <feature.icon
-                  className="mx-auto mb-3 text-[#F6A800]"
-                  size={32}
+                  className="mx-auto mb-2 md:mb-3 text-[#F6A800]"
+                  size={24}
                 />
-                <p className="text-sm font-medium">{feature.text}</p>
+                <p className="text-xs md:text-sm font-medium leading-tight">
+                  {feature.text}
+                </p>
               </motion.div>
             ))}
           </motion.div>

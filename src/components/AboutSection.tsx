@@ -99,7 +99,7 @@ const AboutSection = () => {
   return (
     <section
       id="about"
-      className="py-20 bg-gradient-to-br from-gray-50 to-white"
+      className="pt-12 pb-8 md:py-20 bg-gradient-to-br from-gray-50 to-white"
     >
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Заголовок секции */}
@@ -233,52 +233,70 @@ const AboutSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-24"
+          className="mb-16 md:mb-24"
         >
-          <h3 className="text-2xl font-bold text-[#00205B] font-montserrat text-center mb-12">
+          <h3 className="text-xl md:text-2xl font-bold text-[#00205B] font-montserrat text-center mb-8 md:mb-12">
             История развития
           </h3>
-          <div className="relative">
-            {/* Линия времени */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-[#F6A800]/20 rounded-full"></div>
 
-            <div className="space-y-12">
+          {/* Новый дизайн - горизонтальная карточная система */}
+          <div className="px-4 md:px-6 lg:px-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
               {achievements.map((achievement, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
                   viewport={{ once: true }}
-                  className={`flex items-center ${
-                    index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                  }`}
+                  className="relative group"
                 >
-                  <div
-                    className={`w-1/2 ${
-                      index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'
-                    }`}
-                  >
-                    <div className="bg-white rounded-2xl p-8 shadow-soft">
-                      <div className="text-2xl font-bold text-[#F6A800] mb-2">
+                  {/* Карточка */}
+                  <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
+                    {/* Год - в верхней части карточки */}
+                    <div className="mb-4">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#F6A800] to-[#E59400] text-white rounded-2xl font-bold text-lg shadow-lg">
                         {achievement.year}
                       </div>
-                      <h4 className="text-lg font-semibold text-[#00205B] mb-2 font-montserrat">
-                        {achievement.title}
-                      </h4>
-                      <p className="text-gray-600 text-sm">
-                        {achievement.description}
-                      </p>
                     </div>
+
+                    {/* Заголовок */}
+                    <h4 className="text-lg md:text-xl font-bold text-[#00205B] mb-3 font-montserrat leading-tight">
+                      {achievement.title}
+                    </h4>
+
+                    {/* Описание */}
+                    <p className="text-gray-600 text-sm md:text-base leading-relaxed flex-grow">
+                      {achievement.description}
+                    </p>
                   </div>
 
-                  {/* Точка на линии времени */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#F6A800] rounded-full border-4 border-white shadow-lg"></div>
-
-                  <div className="w-1/2"></div>
+                  {/* Номер этапа (опционально) */}
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-[#00205B] text-white rounded-full flex items-center justify-center text-xs font-bold shadow-lg">
+                    {index + 1}
+                  </div>
                 </motion.div>
               ))}
             </div>
+
+            {/* Дополнительная информация */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              viewport={{ once: true }}
+              className="mt-12 text-center"
+            >
+              <div className="bg-gradient-to-r from-[#00205B] to-[#1a3a6b] rounded-2xl p-6 md:p-8 text-white">
+                <h4 className="text-lg md:text-xl font-bold mb-2 font-montserrat">
+                  Более 30 лет развития
+                </h4>
+                <p className="text-gray-300 text-sm md:text-base">
+                  От небольшой компании до ведущего представителя DoorHan в
+                  Крыму
+                </p>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
 

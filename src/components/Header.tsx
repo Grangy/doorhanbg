@@ -21,7 +21,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (typeof window !== 'undefined') {
-        setIsScrolled(window.scrollY > 20);
+        setIsScrolled(window.scrollY > 50);
       }
     };
 
@@ -41,27 +41,49 @@ const Header = () => {
 
   return (
     <>
-      <div className="hidden lg:block bg-[#00205B] text-white py-2">
-        <div className="container mx-auto px-4 max-w-7xl">
+      {/* Верхняя информационная полоса */}
+      <div className="hidden lg:block bg-gradient-to-r from-[#00205B] to-[#1a3a6b] text-white py-3 relative overflow-hidden">
+        {/* Декоративный фон */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+        </div>
+
+        <div className="container mx-auto px-4 max-w-7xl relative">
           <div className="flex justify-between items-center text-sm">
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-8">
               <Link
                 href="tel:+79781234567"
-                className="flex items-center space-x-2 hover:text-[#F6A800] transition-colors"
+                className="flex items-center space-x-2 hover:text-[#F6A800] transition-all duration-300 group"
               >
-                <Phone size={16} />
-                <span>+7 (978) 123-45-67</span>
+                <div className="p-1 bg-[#F6A800]/20 rounded-full group-hover:bg-[#F6A800]/30 transition-colors">
+                  <Phone size={14} />
+                </div>
+                <span className="font-medium">+7 (978) 123-45-67</span>
               </Link>
               <Link
                 href="#"
-                className="flex items-center space-x-2 hover:text-[#F6A800] transition-colors"
+                className="flex items-center space-x-2 hover:text-[#F6A800] transition-all duration-300 group"
               >
-                <MapPin size={16} />
-                <span>Симферополь, ул. Примерная, 1</span>
+                <div className="p-1 bg-[#F6A800]/20 rounded-full group-hover:bg-[#F6A800]/30 transition-colors">
+                  <MapPin size={14} />
+                </div>
+                <span className="font-medium">
+                  Симферополь, ул. Примерная, 1
+                </span>
               </Link>
             </div>
-            <div className="text-sm text-gray-300">
-              Работаем с 9:00 до 18:00
+            <div className="flex items-center space-x-4">
+              <div className="text-sm text-gray-300">
+                <span className="text-[#F6A800] font-semibold">Работаем:</span>{' '}
+                9:00 - 18:00
+              </div>
+              <div className="w-px h-4 bg-white/20"></div>
+              <Link
+                href="#"
+                className="text-sm hover:text-[#F6A800] transition-colors font-medium"
+              >
+                Заказать звонок
+              </Link>
             </div>
           </div>
         </div>
@@ -69,77 +91,101 @@ const Header = () => {
 
       {/* Основной header */}
       <motion.header
-        initial={{ y: -100 }}
+        initial={{ y: -150 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`sticky top-0 z-50 transition-all duration-300 ${
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className={`sticky top-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-lg shadow-blue-900/10'
-            : 'bg-white shadow-sm'
+            ? 'bg-white shadow-2xl shadow-blue-900/10 border-b border-gray-100'
+            : 'bg-white/95 backdrop-blur-sm'
         }`}
       >
         <div className="container mx-auto px-4 py-4 max-w-7xl">
           <div className="flex items-center justify-between">
             {/* Логотип */}
-            <Link href="/" className="flex items-center space-x-3 group">
-              <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
+            <Link href="/" className="flex items-center space-x-4 group">
+              <motion.div
+                className="relative w-12 h-12 group-hover:scale-110 transition-transform duration-300"
+                whileHover={{ rotate: 5 }}
+              >
                 <Image
                   src="https://crimea-doorhan.ru/local/templates/skd/images/logo.svg"
                   alt="DoorHan Крым"
                   fill
                   className="object-contain"
                 />
-              </div>
-              <div className="hidden sm:block">
-                <h1 className="text-lg font-bold text-[#00205B] font-montserrat group-hover:text-[#F6A800] transition-colors">
+              </motion.div>
+              <div>
+                <h1 className="text-xl font-bold text-[#00205B] font-montserrat group-hover:text-[#F6A800] transition-colors">
                   DoorHan Крым
                 </h1>
-                <p className="text-xs text-gray-600">Ворота и роллеты</p>
+                <p className="text-sm text-gray-600 font-medium">
+                  Ворота и автоматика
+                </p>
               </div>
             </Link>
 
             {/* Навигация */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden max-[1100px]:hidden min-[1100px]:flex items-center space-x-1">
               {menuItems.map((item, index) => (
                 <Link
                   key={index}
                   href={item.href}
-                  className="text-gray-700 hover:text-[#F6A800] font-medium transition-colors duration-300 relative group py-2"
+                  className="relative px-4 py-2 text-gray-700 hover:text-[#00205B] font-medium transition-all duration-300 rounded-lg group"
                 >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F6A800] transition-all duration-300 group-hover:w-full"></span>
+                  <span className="relative z-10">{item.name}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#F6A800]/10 to-[#F6A800]/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </Link>
               ))}
             </nav>
 
             {/* Правая часть */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2">
               {/* Поиск */}
-              <button className="hidden md:flex items-center justify-center w-10 h-10 text-gray-600 hover:text-[#F6A800] hover:bg-gray-100 rounded-lg transition-all duration-300">
-                <Search size={20} />
-              </button>
+              <motion.button
+                className="hidden md:flex items-center justify-center w-11 h-11 text-gray-600 hover:text-[#F6A800] hover:bg-gray-50 rounded-xl transition-all duration-300 border border-transparent hover:border-gray-200"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Search size={18} />
+              </motion.button>
 
               {/* Профиль */}
-              <button className="hidden md:flex items-center justify-center w-10 h-10 text-gray-600 hover:text-[#F6A800] hover:bg-gray-100 rounded-lg transition-all duration-300">
-                <User size={20} />
-              </button>
+              <motion.button
+                className="hidden md:flex items-center justify-center w-11 h-11 text-gray-600 hover:text-[#F6A800] hover:bg-gray-50 rounded-xl transition-all duration-300 border border-transparent hover:border-gray-200"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <User size={18} />
+              </motion.button>
 
               {/* CTA кнопка */}
-              <Link
-                href="/categories"
-                className="hidden sm:flex items-center space-x-2 bg-[#F6A800] hover:bg-[#ffb700] text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="hidden min-[1100px]:block"
               >
-                <ShoppingCart size={18} />
-                <span className="hidden md:inline">Магазин</span>
-              </Link>
+                <Link
+                  href="/categories"
+                  className="flex items-center space-x-2 bg-gradient-to-r from-[#F6A800] to-[#ffb700] hover:from-[#ffb700] hover:to-[#F6A800] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group"
+                >
+                  <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                  <ShoppingCart size={18} className="relative z-10" />
+                  <span className="relative z-10 hidden md:inline">
+                    Каталог
+                  </span>
+                </Link>
+              </motion.div>
 
               {/* Мобильная кнопка меню */}
-              <button
+              <motion.button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden p-2 text-gray-700 hover:text-[#00205B] hover:bg-gray-100 rounded-lg transition-all duration-300"
+                className="min-[1100px]:hidden p-2 text-gray-700 hover:text-[#00205B] hover:bg-gray-50 rounded-xl transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
@@ -151,30 +197,42 @@ const Header = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden bg-white border-t border-gray-200 shadow-lg"
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="min-[1100px]:hidden bg-white border-t border-gray-200 shadow-lg"
             >
               <div className="container mx-auto px-4 py-6 max-w-7xl">
-                <nav className="flex flex-col space-y-4">
+                <nav className="flex flex-col space-y-2">
                   {menuItems.map((item, index) => (
-                    <Link
+                    <motion.div
                       key={index}
-                      href={item.href}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="text-gray-700 hover:text-[#00205B] font-medium py-2 transition-colors"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
                     >
-                      {item.name}
-                    </Link>
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block px-4 py-3 text-gray-700 hover:text-[#00205B] hover:bg-gray-50 font-medium rounded-lg transition-all duration-300"
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
                   ))}
-                  <div className="pt-4 border-t border-gray-200">
-                    <Link
-                      href="/categories"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="flex items-center justify-center space-x-2 bg-[#F6A800] hover:bg-[#ffb700] text-white px-6 py-3 rounded-xl font-medium transition-all duration-300"
+                  <div className="pt-4 mt-4 border-t border-gray-200">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
                     >
-                      <ShoppingCart size={20} />
-                      <span>Интернет-магазин</span>
-                    </Link>
+                      <Link
+                        href="/categories"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="flex items-center justify-center space-x-2 bg-gradient-to-r from-[#F6A800] to-[#ffb700] hover:from-[#ffb700] hover:to-[#F6A800] text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+                      >
+                        <ShoppingCart size={20} />
+                        <span>Каталог товаров</span>
+                      </Link>
+                    </motion.div>
                   </div>
                 </nav>
               </div>

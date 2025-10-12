@@ -98,7 +98,7 @@ const CategoriesGrid = () => {
   };
 
   return (
-    <section className="pt-24 pb-20 bg-gradient-to-br from-gray-50 to-white">
+    <section className="pt-12 pb-8 md:pt-24 md:pb-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Заголовок секции */}
         <motion.div
